@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Podcast Mastermind</title>
+  <link rel="stylesheet" href="{{ url_for('static', path='/css/app.css') }}">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/"><span class="brand-mark">PM</span> Podcast Mastermind</a>
+    <a class="api-link" href="/docs">API docs ↗</a>
+  </header>
+  <main>
+    <section class="hero">
+      <p class="eyebrow">Private, local-first podcast research</p>
+      <h1>Search the ideas inside<br>your podcast library.</h1>
+      <p class="lede">Publisher transcripts first. Local Whisper when needed. Embeddings served by LM Studio.</p>
+      <form id="search-form" class="search-box">
+        <input id="search-query" type="search" placeholder="Search across every transcript…" required minlength="2">
+        <button type="submit">Search</button>
+      </form>
+    </section>
+
+    <section class="metrics" aria-label="Library statistics">
+      <article><strong id="channel-count">—</strong><span>channels</span></article>
+      <article><strong id="episode-count">—</strong><span>episodes</span></article>
+      <article><strong id="system-status">Checking</strong><span>system status</span></article>
+    </section>
+
+    <section class="grid">
+      <article class="panel">
+        <div class="panel-heading"><div><p class="eyebrow">Sources</p><h2>Channels</h2></div><button id="add-channel-toggle" class="secondary">Add channel</button></div>
+        <form id="channel-form" class="channel-form hidden">
+          <input name="title" placeholder="Podcast title" required>
+          <input name="slug" placeholder="short-slug" pattern="[a-z0-9]+(?:-[a-z0-9]+)*" required>
+          <input name="rss_url" type="url" placeholder="https://example.com/feed.xml" required>
+          <input name="website_url" type="url" placeholder="Website URL (optional)">
+          <button type="submit">Save channel</button>
+        </form>
+        <div id="channels" class="list"><p class="muted">Loading channels…</p></div>
+      </article>
+
+      <article class="panel wide">
+        <div class="panel-heading"><div><p class="eyebrow">Latest</p><h2>Episodes</h2></div><button id="sync-button" class="secondary">Sync two years</button></div>
+        <div id="sync-message" class="notice hidden"></div>
+        <div id="episodes" class="episode-list"><p class="muted">Loading episodes…</p></div>
+      </article>
+    </section>
+
+    <section id="search-results-section" class="panel results hidden">
+      <div class="panel-heading"><div><p class="eyebrow">Semantic matches</p><h2>Search results</h2></div></div>
+      <div id="search-results"></div>
+    </section>
+  </main>
+  <script src="{{ url_for('static', path='/js/app.js') }}" defer></script>
+</body>
+</html>
+
